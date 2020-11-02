@@ -1,30 +1,26 @@
-<?php
+<?php 
+include_once "Basket.php"; 
 
-include_once "Panier.php";
+$oBasket = new Basket(); 
+$oBasket->addProduct("Raspberry Pi", "RPI", 37.90);
+$oBasket->addProduct("Klim Domination", "KLIMDOM", 59.90);
+$oBasket->addProduct("iPhone X", "IPHX", 1000);
 
+$aProductFromBasket = $oBasket->getProductPrice("IPHX");
 
-$panier = new Panier();
-$panier->addProduit("Raspberry Pi", "RPI", 37.90);
-$panier->addProduit("Klim Domination", "KLIMDOM", 59.90);
+echo "Le prix de mon produit est ".$oBasket->getProductPrice("IPHX");
 
-$panier->addProduit("iPhone X", "IPHX", 1000);
+$oBasket->deleteProduct("IPHX");
 
-$produit_from_panier = $panier->getProduitPrix("IPHX");
+$aProductFromBasket = $oBasket->getProductPrice("IPHX");
 
-echo "Le prix de mon produit est ".$panier->getProduitPrix("IPHX")."<br />";
-
-
-$panier->deleteProduit("IPHX");
-
-$produit_from_panier = $panier->getProduitPrix("IPHX");
-
-if(null != $panier->getProduitPrix("IPHX")){
-    echo "Le prix de mon produit qui est toujours vivant est ".$panier->getProduitPrix("IPHX")."<br />";
+if(null != $oBasket->getProductPrice("IPHX")){
+    echo "Le prix de mon produit qui est toujours vivant est ".$oBasket->getProductPrice("IPHX");
 }
 else{
-    echo "Il n'y a pas de produit dont le nom est IPHX"."<br />";
+    echo "Il n'y a pas de produit dont le nom est IPHX";
 }
 
-$prix = $panier->getPrixTotal();
+$nPrice = $oBasket->getPriceTotal();
 
-echo $prix;
+echo $nPrice;
